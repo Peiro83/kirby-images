@@ -1,0 +1,13 @@
+{
+    "name": "medienbaecker/images",
+    "description": "Images",
+    "version": "3.0.0",
+    "type": "kirby-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thomas Günther",
+            "email": "mail@medienbaecker.com"
+        }
+    ]
+}
