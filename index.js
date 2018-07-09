@@ -54,12 +54,19 @@ panel.plugin("medienbaecker/images", {
 
             <kirby-button slot="options" icon="add" v-if="this.selectedImages.length < this.images.length" @click="$refs.imageSelect.open()">Select image</kirby-button>
 
-            <kirby-draggable :list="this.selectedImages" v-if="selectedImages.length" element="kirby-cards" @update="save">
+            <kirby-draggable 
+                :list="this.selectedImages"
+                v-if="selectedImages.length"
+                element="kirby-cards"
+                @update="save"
+                :options="{handle: '.kirby-sort-handle'}"
+            >
                 <kirby-card
                     v-for="(image, key) in selectedImages"
                     :key="key"
                     :text="image.text"
                     :image="image.image"
+                    :sortable="true"
                     :options="[
                         {icon: 'edit', text: 'Edit', click: 'edit'},
                         {icon: 'cancel', text: 'Remove', click: 'remove'}
