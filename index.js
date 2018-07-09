@@ -9,28 +9,31 @@ panel.plugin("medienbaecker/images", {
         },
         data() {
           return {
-            selected: this.value
+            selectedImages: this.value
           };
         },
         methods: {
             add(image) {
-                this.selected.push(image);
-                this.$emit("input", this.selected);
+                this.selectedImages.push(image);
+                this.$emit("input", this.selectedImages);
                 this.$refs.imageSelect.close();
             },
             remove(image) {
-                this.selected.splice(image, 1);
-                this.$emit("input", this.selected);
-            },
-            isSelected(image) {
-                return this.selected.includes(image);
+                this.selectedImages.splice(image, 1);
+                this.$emit("input", this.selectedImages);
             },
             imageOptions(action, image) {
-                console.log(image);
                 switch(action) {
                     case 'remove':
                         this.remove(image);
                 }
+            },
+            isSelected(image) {
+                var match = false;
+                this.selectedImages.forEach(function(i) {
+                    if(i.text == image.text) match = true;
+                });
+                return match;
             }
         },
         template: `
@@ -38,9 +41,9 @@ panel.plugin("medienbaecker/images", {
 
             <kirby-button slot="options" icon="add" @click="$refs.imageSelect.open()">Select image</kirby-button>
 
-            <kirby-draggable v-if="selected.length" element="kirby-cards">
+            <kirby-draggable v-if="selectedImages.length" element="kirby-cards">
                 <kirby-card
-                    v-for="(image, key) in selected"
+                    v-for="(image, key) in selectedImages"
                     :key="key"
                     :text="image.text"
                     :image="image.image"
@@ -52,7 +55,10 @@ panel.plugin("medienbaecker/images", {
                 />
             </kirby-draggable>
 
-            <kirby-box v-else text="Nothing selected"></kirby-box>
+            <kirby-box v-else @click="$refs.imageSelect.open()">
+                No images selected. <br/>
+                Select an image <strike>or use drag and drop</strike>.
+            </kirby-box>
 
             <kirby-dialog ref="imageSelect">
               <kirby-list>
