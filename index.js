@@ -25,10 +25,11 @@ panel.plugin("medienbaecker/images", {
             isSelected(image) {
                 return this.selected.includes(image);
             },
-            imageOptions(action) {
+            imageOptions(action, image) {
+                console.log(image);
                 switch(action) {
                     case 'remove':
-                        this.remove(0);
+                        this.remove(image);
                 }
             }
         },
@@ -47,7 +48,7 @@ panel.plugin("medienbaecker/images", {
                         {icon: 'edit', text: 'Edit', click: 'edit'},
                         {icon: 'cancel', text: 'Remove', click: 'remove'}
                     ]"
-                    @action="imageOptions"
+                    @action="imageOptions($event, key)"
                 />
             </kirby-draggable>
 
