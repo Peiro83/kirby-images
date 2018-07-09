@@ -13,21 +13,34 @@ panel.plugin("medienbaecker/images", {
           };
         },
         methods: {
+
+            save() {
+                this.$emit("input", this.selectedImages);
+            },
+
+            // Add image to the selected images array.
             add(image) {
                 this.selectedImages.push(image);
-                this.$emit("input", this.selectedImages);
+                this.save();
                 this.$refs.imageSelect.close();
             },
+
+            // Remove image from the selected images array.
             remove(image) {
                 this.selectedImages.splice(image, 1);
-                this.$emit("input", this.selectedImages);
+                this.save();
             },
+
+            // Handle the option buttons of each image.
             imageOptions(action, image) {
+                console.log("la");
                 switch(action) {
                     case 'remove':
                         this.remove(image);
                 }
             },
+
+            // Determine if image is in the selected images array.
             isSelected(image) {
                 var match = false;
                 this.selectedImages.forEach(function(i) {
@@ -35,6 +48,7 @@ panel.plugin("medienbaecker/images", {
                 });
                 return match;
             }
+
         },
         template: `
           <kirby-field :label="label" class="images">
