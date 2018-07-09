@@ -52,7 +52,7 @@ panel.plugin("medienbaecker/images", {
         template: `
           <kirby-field :label="label" class="images">
 
-            <kirby-button slot="options" icon="add" @click="$refs.imageSelect.open()">Select image</kirby-button>
+            <kirby-button slot="options" icon="add" v-if="this.selectedImages.length < this.images.length" @click="$refs.imageSelect.open()">Select image</kirby-button>
 
             <kirby-draggable :list="this.selectedImages" v-if="selectedImages.length" element="kirby-cards" @update="save">
                 <kirby-card
@@ -68,9 +68,8 @@ panel.plugin("medienbaecker/images", {
                 />
             </kirby-draggable>
 
-            <kirby-box v-else @click="$refs.imageSelect.open()">
-                No images selected. <br/>
-                Select an image <strike>or use drag and drop</strike>.
+            <kirby-box v-else>
+                No images selected.
             </kirby-box>
 
             <kirby-dialog ref="imageSelect">
