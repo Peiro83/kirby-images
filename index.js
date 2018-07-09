@@ -33,7 +33,6 @@ panel.plugin("medienbaecker/images", {
 
             // Handle the option buttons of each image.
             imageOptions(action, image) {
-                console.log("la");
                 switch(action) {
                     case 'remove':
                         this.remove(image);
@@ -47,7 +46,7 @@ panel.plugin("medienbaecker/images", {
                     if(i.text == image.text) match = true;
                 });
                 return match;
-            }
+            },
 
         },
         template: `
@@ -55,7 +54,7 @@ panel.plugin("medienbaecker/images", {
 
             <kirby-button slot="options" icon="add" @click="$refs.imageSelect.open()">Select image</kirby-button>
 
-            <kirby-draggable v-if="selectedImages.length" element="kirby-cards">
+            <kirby-draggable :list="this.selectedImages" v-if="selectedImages.length" element="kirby-cards" @update="save">
                 <kirby-card
                     v-for="(image, key) in selectedImages"
                     :key="key"
