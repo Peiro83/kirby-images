@@ -20,14 +20,15 @@ panel.plugin("medienbaecker/images", {
             },
             remove(image) {
                 this.selected.splice(image, 1);
+                this.$emit("input", this.selected);
             },
             isSelected(image) {
                 return this.selected.includes(image);
             },
-            imageOptions(action, image) {
+            imageOptions(action) {
                 switch(action) {
                     case 'remove':
-                        this.remove(image);
+                        this.remove(0);
                 }
             }
         },
@@ -47,9 +48,7 @@ panel.plugin("medienbaecker/images", {
                         {icon: 'cancel', text: 'Remove', click: 'remove'}
                     ]"
                     @action="imageOptions"
-                >
-
-                </kirby-card>
+                />
             </kirby-draggable>
 
             <kirby-box v-else text="Nothing selected"></kirby-box>
