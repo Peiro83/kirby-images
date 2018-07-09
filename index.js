@@ -4,26 +4,30 @@ panel.plugin("medienbaecker/images", {
         props: {
           label: String,
           buttons: String,
-          value: String,
-          images: Array
+          images: Array,
+          value: Array,
         },
         data() {
           return {
-            selected: []
+            selected: this.value
           };
         },
         methods: {
             add(image) {
                 this.selected.push(image);
+                this.$emit("input", this.selected);
                 this.$refs.imageSelect.close();
+            },
+            remove(image) {
+                this.selected.splice(image, 1);
             },
             isSelected(image) {
                 return this.selected.includes(image);
             },
-            action(action, image) {
+            imageOptions(action, image) {
                 switch(action) {
                     case 'remove':
-                        this.selected.splice(image, 1);
+                        this.remove(image);
                 }
             }
         },
@@ -42,7 +46,7 @@ panel.plugin("medienbaecker/images", {
                         {icon: 'edit', text: 'Edit', click: 'edit'},
                         {icon: 'cancel', text: 'Remove', click: 'remove'}
                     ]"
-                    @action="action"
+                    @action="imageOptions"
                 >
 
                 </kirby-card>
