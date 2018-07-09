@@ -4,7 +4,7 @@ Kirby::plugin('medienbaecker/images', [
     'fields' => [
         'images' => [
             'props' => [
-                'value' => function ($value) {
+                'value' => function ($value = "") {
                     return Yaml::decode($value);
                 }
             ],
