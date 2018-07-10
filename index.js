@@ -14,6 +14,7 @@ panel.plugin("medienbaecker/images", {
         },
         methods: {
 
+            // Save the selected images array.
             save() {
                 this.$emit("input", this.selectedImages);
             },
@@ -48,6 +49,7 @@ panel.plugin("medienbaecker/images", {
                 return match;
             },
 
+            // Turn the filename into a name.
             toFile(image) {
                 var match = false;
                 this.images.forEach(function(i) {
