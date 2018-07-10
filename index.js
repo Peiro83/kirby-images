@@ -43,10 +43,18 @@ panel.plugin("medienbaecker/images", {
             isSelected(image) {
                 var match = false;
                 this.selectedImages.forEach(function(i) {
-                    if(i.text == image.text) match = true;
+                    if(i == image.text) match = true;
                 });
                 return match;
             },
+
+            toFile(image) {
+                var match = false;
+                this.images.forEach(function(i) {
+                    if(i.text == image) match = i.image;
+                });
+                return match;
+            }
 
         },
         template: `
@@ -64,8 +72,8 @@ panel.plugin("medienbaecker/images", {
                 <kirby-card
                     v-for="(image, key) in selectedImages"
                     :key="key"
-                    :text="image.text"
-                    :image="image.image"
+                    :text="image"
+                    :image="toFile(image)"
                     :sortable="true"
                     :options="[
                         {icon: 'edit', text: 'Edit', click: 'edit'},
@@ -87,7 +95,7 @@ panel.plugin("medienbaecker/images", {
                   :text="image.text"
                   :image="image.image"
                 >
-                  <kirby-button icon="add" slot="options" v-if="!isSelected(image)" @click="add(image)"></kirby-button>
+                  <kirby-button icon="add" slot="options" v-if="!isSelected(image)" @click="add(image.text)"></kirby-button>
                 </kirby-list-item>
               </kirby-list>
             </kirby-dialog>
