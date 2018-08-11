@@ -76,5 +76,15 @@ return [
         'search'        => 'Filtra immagini...',
         'noImagesFound' => 'Nessuna immagine trovata',
         'addAll'        => 'Aggiungi tutte le immagini'
-    ]
+    ],
+    'es' => [
+        'noImages'      => 'Esta página no contiene imágenes',
+        'noMoreImages'  => 'Esta página no contiene más imágenes',
+        'nothingAdded'  => 'No ha seleccionado ninguna imagen',
+        'help'          => 'Seleccione una imagen o arrástrela y suéltela',
+        'select'        => 'Seleccione una imagen',
+        'search'        => 'Filtrar imágenes...',
+        'noImagesFound' => 'No se encontraron imágenes',
+        'addAll'        => 'Añada todas las imágenes'
+    ]    
 ];
